@@ -79,11 +79,13 @@ public class UsuarioDao extends Conexion {
 		}
 	}
 	
-	public UsuarioVo login() {
+	public UsuarioVo login(String Usuario, String Contraseña) {
 		try {
 			UsuarioVo entrar = new UsuarioVo();
 			Conectar();
 			PreparedStatement sentencia = Conexion.prepareStatement("select * from usuarios where usuario = ? and contraseña = ?");
+			sentencia.setString(1, Usuario);
+			sentencia.setString(2, Contraseña);
 			ResultSet datos = sentencia.executeQuery();
 			if (datos != null) {
 				entrar.setCedula_usuario(datos.getLong("cedula_usuario"));
